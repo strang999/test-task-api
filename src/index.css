@@ -104,7 +104,7 @@ a:hover {
   justify-content: space-evenly;
   align-items: center;
   flex-wrap: wrap;
-  padding: 1rem;
+  padding: 2rem;
 }
 .products {
   display: flex;

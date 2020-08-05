@@ -11,7 +11,6 @@ class ProductDetailsPage extends Component {
     price: 0,
   };
   componentDidMount() {
-    console.log(this.props);
     Axios.get(
       `http://6788c3e3d2a8.ngrok.io/v1/market/product_list?limit=1&offset=${
         this.props.match.params.id - 1
@@ -23,7 +22,6 @@ class ProductDetailsPage extends Component {
           productDetails: [...res.data.results],
           price: res.data.results[0].price,
         });
-        console.log(res.data.results[0].price);
       })
       .catch((err) => {
         this.setState({ loading: false, error: true });
@@ -32,12 +30,11 @@ class ProductDetailsPage extends Component {
 
   changeHandler = (e) => {
     this.setState({ totalPrice: this.state.price * e.target.value });
-    console.log(e.target.value);
   };
   render() {
     return (
-      <div>
-        <div className="back-to-result">
+      <div className="subheader">
+        <div className="subheader__back-to-result">
           <Link to="/">Вернуться к категориям</Link>
         </div>
         {this.state.productDetails.map((product) => (
