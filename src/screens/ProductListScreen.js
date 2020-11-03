@@ -16,7 +16,7 @@ class ProductListScreen extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevState.categoryId !== this.props.match.params.id) {
       Axios.get(
-        `http://6788c3e3d2a8.ngrok.io/v1/market/product_list?category=${this.props.match.params.id}&limit=100`
+        `https://6788c3e3d2a8.ngrok.io/v1/market/product_list?category=${this.props.match.params.id}&limit=100`
       )
         .then((res) => {
           this.setState({ loading: false, products: [...res.data.results] });
@@ -28,23 +28,23 @@ class ProductListScreen extends Component {
   }
 
   search = async (val) => {
+    this.setState({ loading: true });
+    const res = await Axios(
+      `https://6788c3e3d2a8.ngrok.io/v1/market/product_list?category=${this.props.match.params.id}&searchkey=${val}&limit=100`
+    );
+    const results = await res.data.results;
+    const resultsLow = results.map((item) => item.toLowerCase());
+    console.log(resultsLow);
+    this.setState({ results, loading: false });
+  };
+
+  onChangeHandler = async (e) => {
     let capitalize = (str, lower = false) =>
       (lower ? str.toLowerCase() : str).replace(
         /(?:^|\s|["'([{])+\S/g,
         (match) => match.toUpperCase()
       );
-    this.setState({ loading: true });
-    const res = await Axios(
-      `http://6788c3e3d2a8.ngrok.io/v1/market/product_list?category=${
-        this.props.match.params.id
-      }&searchkey=${capitalize(val)}&limit=100`
-    );
-    const results = await res.data.results;
-    this.setState({ results, loading: false });
-  };
-
-  onChangeHandler = async (e) => {
-    this.search(e.target.value);
+    this.search(capitalize(e.target.value) || e.target.value);
     this.setState({ value: e.target.value });
   };
 

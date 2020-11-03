@@ -12,7 +12,7 @@ class App extends Component {
     error: false,
   };
   componentDidMount() {
-    Axios.get("http://6788c3e3d2a8.ngrok.io/v1/generic/category/")
+    Axios.get("https://6788c3e3d2a8.ngrok.io/v1/generic/category/")
       .then((res) => {
         this.setState({ loading: false, categories: [...res.data.results] });
       })
@@ -41,13 +41,13 @@ class App extends Component {
             </div>
           </header>
           <aside className="sidebar">
-            <h3>Категории</h3>
+            <h3 className="sidebar__header">Категории</h3>
             <button className="sidebar__close-btn" onClick={closeMenu}>
               x
             </button>
-            <ul>
+            <ul className="sidebar__list">
               {this.state.categories.map((category) => (
-                <li key={category.id}>
+                <li className="sidebar__items" key={category.id}>
                   <Link to={"/category/" + category.id}>{category.name}</Link>
                 </li>
               ))}

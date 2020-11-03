@@ -157,6 +157,20 @@ a:hover {
   height: 100%;
   transition: all 0.5s;
 }
+.sidebar__header {
+  text-align: center;
+  font-size: 2rem;
+}
+.sidebar__list {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 80vh;
+  font-size: 1.8rem;
+  padding: 1rem auto;
+}
+
 .sidebar.open {
   transform: translateX(0);
 }

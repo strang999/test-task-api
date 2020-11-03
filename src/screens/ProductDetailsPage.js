@@ -12,7 +12,7 @@ class ProductDetailsPage extends Component {
   };
   componentDidMount() {
     Axios.get(
-      `http://6788c3e3d2a8.ngrok.io/v1/market/product_list?limit=1&offset=${
+      `https://6788c3e3d2a8.ngrok.io/v1/market/product_list?limit=1&offset=${
         this.props.match.params.id - 1
       }`
     )
